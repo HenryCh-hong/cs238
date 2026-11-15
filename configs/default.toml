@@ -1,0 +1,55 @@
+# Default configuration for the SPY historical replay. All money quantities are
+# fractions of capital (1 bp = 1e-4). Changing this file changes results: the
+# full config and its hash are written next to every result file.
+
+seed = 20261115
+
+[data]
+ticker = "SPY"
+source = "yahoo"            # via yfinance, adjusted close (total return incl. dividends)
+start = "1993-01-29"
+end = "2026-11-13"          # inclusive last trading day used; fixed for reproducibility
+raw_path = "data/raw/SPY_daily.csv"
+
+[forecast]
+# Decision at the close of day t; target r_{t+1} = AdjClose_{t+1}/AdjClose_t - 1.
+# A model used at origin t is fit only on pairs (x_s, r_{s+1}) with s + 1 <= t.
+min_train_days = 1260       # ~5 years before the first forecast origin
+retrain_every = 21          # trading days between refits (expanding window)
+archive_path = "data/processed/forecast_archive.csv"
+
+[forecast.ridge]
+alpha = 10.0
+
+[forecast.random_forest]
+n_estimators = 300
+max_depth = 6
+min_samples_leaf = 50
+max_features = 0.5
+random_state = 0
+
+[forecast.gradient_boosting]
+n_estimators = 200
+max_depth = 2
+learning_rate = 0.05
+subsample = 0.8
+random_state = 0
+
+[periods]
+calibration_end = "2014-12-31"   # belief model fitted on archive rows up to here
+evaluation_start = "2015-01-01"  # held-out replay period
+
+[belief]
+method = "ledoit_wolf"      # or "sample"
+mode = "fixed"              # "fixed": fit once on calibration; "expanding": refit every refit_every days on realized history only
+refit_every = 21
+calibration_days = 0        # 0 = all calibration rows; n > 0 = last n rows (Experiment 4)
+
+[decision]
+lam = 1.0
+tau = 1e-4
+cost_A = 1e-5
+cost_B = 1e-5
+budget = 1.0                # per-date acquisition budget; >= cost_A + cost_B is non-binding
+n_quad = 201                # outer quadrature nodes for the two-step planner
+random_policy_p = 0.5       # probability the random policy buys at each step

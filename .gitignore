@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.DS_Store
+# Market data is re-downloaded by the pipeline (Yahoo terms restrict redistribution);
+# manifests with hashes and date ranges are committed instead.
+data/raw/*.csv
+data/raw/*.parquet
+data/processed/*.csv
+data/processed/*.parquet
+!data/**/.gitkeep
+results/logs/*.csv
+results/logs/*.csv.gz

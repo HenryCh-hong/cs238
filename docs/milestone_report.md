@@ -94,7 +94,7 @@ paired per-date difference against free-only. With a few bp of daily effect and 
 | 5 | free-only | −0.44 | 0.00 | 0 % | 0 % | 2 / 98 / 0 % | 2.6 | — |
 | 5 | always-buy | −1.28 | 0.20 | 100 % | 100 % | 4 / 96 / 1 % | 4.2 | −0.84 [−2.34, +0.24] |
 | 5 | fixed order | −0.72 | 0.03 | 33 % | 0 % | 4 / 96 / 0 % | 23.8 | −0.28 [−1.53, +0.68] |
-| 5 | random | −0.71 | 0.08 | 38 % | 37 % | 2 / 98 / 0 % | 3.4 | −0.27 [−0.95, +0.27] |
+| 5 | random | −0.71 | 0.08 | 38 % | 37 % | 2 / 98 / 0 % | 3.4 | −0.27 [−0.94, +0.27] |
 | 5 | myopic VOI | −0.72 | 0.03 | 32 % | 0 % | 4 / 96 / 0 % | 5.8 | −0.28 [−1.53, +0.68] |
 | 5 | optimal VOI | −0.72 | 0.03 | 33 % | 0 % | 4 / 96 / 0 % | 50.3 | −0.28 [−1.53, +0.68] |
 
@@ -171,14 +171,14 @@ Evidence:
 2. **A's skill reversed out of sample.** Partial correlation of the random-forest forecast
    with r_{t+1} given the free forecast: +0.030 (SE 0.016) in 1999–2014, −0.043 (SE 0.018) in
    2015–2026. Sub-periods swing from +0.06 to −0.14. Gradient boosting moved the other way:
-   +0.013 in calibration, +0.105 (SE 0.018) out of sample.
-3. **The calibration estimate came from turbulent days.** 73 % of the rf–return
-   cross-product in calibration comes from the highest-volatility tercile of days and 47 %
-   from 2008 alone.
+   +0.013 in calibration, +0.104 (SE 0.018) out of sample.
+3. **The calibration estimate came from turbulent days.** 47 % of the covariance between
+   A and the next-day return in 1999–2014 comes from 2008 alone; without 2008, A's partial
+   correlation given y0 falls from 0.030 to 0.014.
 4. **The loss is concentrated.** The optimal-VOI position differs from free-only on 879
    dates (29.5 %), which carry essentially all of the −10,018 bp total. The main channel is
-   de-risking before rallies: long→flat switches on 333 dates cost −6,761 bp (worst:
-   2020-04-03, SPY +6.7 %). Dropping the 5 % largest-|r| dates moves the mean from −3.36 to
+   de-risking before rallies: long→flat switches on 333 dates cost −6,761 bp (worst: the
+   decision on 2020-04-03, followed by SPY +6.7 % to the next close on 2020-04-06). Dropping the 5 % largest-|r| dates moves the mean from −3.36 to
    −1.40 bp. 71 % of the loss falls in the high-volatility tercile, and 9 of 12 years are
    negative.
 5. **Refitting the belief helps.** An expanding belief refitted every 21 dates on realized

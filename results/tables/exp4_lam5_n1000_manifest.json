@@ -1,0 +1,131 @@
+{
+  "tag": "exp4_lam5_n1000",
+  "config": {
+    "seed": 20261115,
+    "data": {
+      "ticker": "SPY",
+      "source": "yahoo",
+      "start": "1993-01-29",
+      "end": "2026-11-13",
+      "raw_path": "data/raw/SPY_daily.csv"
+    },
+    "forecast": {
+      "min_train_days": 1260,
+      "retrain_every": 21,
+      "archive_path": "data/processed/forecast_archive.csv",
+      "ridge": {
+        "alpha": 10.0
+      },
+      "random_forest": {
+        "n_estimators": 300,
+        "max_depth": 6,
+        "min_samples_leaf": 50,
+        "max_features": 0.5,
+        "random_state": 0
+      },
+      "gradient_boosting": {
+        "n_estimators": 200,
+        "max_depth": 2,
+        "learning_rate": 0.05,
+        "subsample": 0.8,
+        "random_state": 0
+      }
+    },
+    "periods": {
+      "calibration_end": "2014-12-31",
+      "evaluation_start": "2015-01-01"
+    },
+    "belief": {
+      "method": "ledoit_wolf",
+      "mode": "fixed",
+      "refit_every": 21,
+      "calibration_days": 1000
+    },
+    "decision": {
+      "lam": 5.0,
+      "tau": 0.0001,
+      "cost_A": 1e-05,
+      "cost_B": 1e-05,
+      "budget": 1.0,
+      "n_quad": 201,
+      "random_policy_p": 0.5
+    }
+  },
+  "config_hash": "9291f2b7ff38c290",
+  "seed": 20261115,
+  "data": {
+    "source": "data/processed/forecast_archive.csv",
+    "sha256": "4848ac43c361f096d7cd98a62a21700f19bca7c32efeb00e5ef6a6f5c46acea1",
+    "calibration_end": "2014-12-31",
+    "evaluation_start": "2015-01-01",
+    "n_archive": 6994,
+    "n_eval": 2984,
+    "n_calibration_rows": 4010,
+    "archive_first": "1999-01-26",
+    "archive_last": "2026-11-12"
+  },
+  "git_commit": "c12c64accfe70760f8db76e6350b02d663c62b6a",
+  "python": "3.12.16",
+  "platform": "Linux-7.0.0-1019-azure-x86_64-with-glibc2.43",
+  "numpy": "2.5.5",
+  "pandas": "3.1.1",
+  "runtime_seconds": 382.69951367378235,
+  "belief_fits": [
+    {
+      "decision_date": "2015-01-02 00:00:00",
+      "n": "1000",
+      "first_row": "2011-01-11 00:00:00",
+      "last_row": "2014-12-31 00:00:00",
+      "last_return_date": "2015-01-02 00:00:00"
+    }
+  ],
+  "n_belief_fits": 1,
+  "first_belief_model": {
+    "mean": [
+      0.0006066619544795621,
+      0.00031202117780381724,
+      0.0004256450369717216,
+      0.00038222075591095624
+    ],
+    "cov": [
+      [
+        9.367841989256422e-05,
+        4.891852743157007e-07,
+        1.4114012899840784e-07,
+        -7.207664591218357e-08
+      ],
+      [
+        4.891852743157007e-07,
+        1.0565781397700605e-06,
+        3.943910653701811e-07,
+        3.7019640602637296e-07
+      ],
+      [
+        1.4114012899840784e-07,
+        3.943910653701811e-07,
+        7.296305629522055e-07,
+        5.451096241631846e-07
+      ],
+      [
+        -7.207664591218357e-08,
+        3.7019640602637296e-07,
+        5.451096241631846e-07,
+        1.641954912752692e-06
+      ]
+    ],
+    "meta": {
+      "method": "ledoit_wolf",
+      "n": "1000",
+      "shrinkage": "0.22450414020045553",
+      "eig_min_raw": "0.4534486774125416",
+      "n_eig_floored": "0",
+      "duplicates": "()"
+    }
+  },
+  "nan_counts": {
+    "predicted_value": 11936,
+    "voi_next_1": 10343,
+    "revealed_A": 12859,
+    "revealed_B": 10749
+  }
+}

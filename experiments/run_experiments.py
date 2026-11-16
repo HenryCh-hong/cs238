@@ -139,7 +139,7 @@ def exp2_voi_calibration(cfg, workers, max_dates):
         rows.append(pd.DataFrame([{"arm": "full_optimal_policy(net)", "bin": "all", "n": len(cf), "lam": lam,
                                    "pred_mean_bp": pred.mean(), "real_mean_bp": ci["estimate"],
                                    "real_ci_lo_bp": ci["lo"], "real_ci_hi_bp": ci["hi"],
-                                   "frac_position_changed": float((cf["buys_opt"] > 0).mean())}]))
+                                   "frac_dates_with_purchase": float((cf["buys_opt"] > 0).mean())}]))
     tab = pd.concat(rows, ignore_index=True)
     _save(tab, "exp2_voi_calibration")
     return tab

@@ -1,0 +1,7 @@
+policy,baseline,mean_diff_bp,ci_lo_bp,ci_hi_bp,se_bp,n_dates
+always_buy,free_only,-0.36849468861507695,-2.529215371951254,1.4178001495834913,0.9665398185121993,2984
+fixed_order,free_only,0.0,0.0,0.0,0.0,2984
+free_only,free_only,0.0,0.0,0.0,0.0,2984
+myopic_voi,free_only,0.0,0.0,0.0,0.0,2984
+optimal_voi,free_only,0.0,0.0,0.0,0.0,2984
+random,free_only,0.41922844157798483,-0.5308202487445293,1.917919482189699,0.6546854042225553,2984

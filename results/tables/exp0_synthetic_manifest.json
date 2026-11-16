@@ -1,0 +1,130 @@
+{
+  "tag": "exp0_synthetic",
+  "config": {
+    "seed": 20261115,
+    "data": {
+      "ticker": "SPY",
+      "source": "yahoo",
+      "start": "1993-01-29",
+      "end": "2026-11-13",
+      "raw_path": "data/raw/SPY_daily.csv"
+    },
+    "forecast": {
+      "min_train_days": 1260,
+      "retrain_every": 21,
+      "archive_path": "data/processed/forecast_archive.csv",
+      "ridge": {
+        "alpha": 10.0
+      },
+      "random_forest": {
+        "n_estimators": 300,
+        "max_depth": 6,
+        "min_samples_leaf": 50,
+        "max_features": 0.5,
+        "random_state": 0
+      },
+      "gradient_boosting": {
+        "n_estimators": 200,
+        "max_depth": 2,
+        "learning_rate": 0.05,
+        "subsample": 0.8,
+        "random_state": 0
+      }
+    },
+    "periods": {
+      "calibration_end": "2014-12-31",
+      "evaluation_start": "2015-01-01"
+    },
+    "belief": {
+      "method": "ledoit_wolf",
+      "mode": "fixed",
+      "refit_every": 21,
+      "calibration_days": 0
+    },
+    "decision": {
+      "lam": 5.0,
+      "tau": 0.0001,
+      "cost_A": 2e-05,
+      "cost_B": 2e-05,
+      "budget": 1.0,
+      "n_quad": 201,
+      "random_policy_p": 0.5
+    }
+  },
+  "config_hash": "217d8755f0f3d678",
+  "seed": 20261115,
+  "data": {
+    "source": "provided",
+    "calibration_end": "2018-05-27",
+    "evaluation_start": "2018-05-28",
+    "n_archive": 8000,
+    "n_eval": 3200,
+    "n_calibration_rows": 4800,
+    "archive_first": "2000-01-03",
+    "archive_last": "2030-08-30"
+  },
+  "git_commit": "c12c64accfe70760f8db76e6350b02d663c62b6a",
+  "python": "3.12.16",
+  "platform": "Linux-7.0.0-1019-azure-x86_64-with-glibc2.43",
+  "numpy": "2.5.5",
+  "pandas": "3.1.1",
+  "runtime_seconds": 233.61621856689453,
+  "belief_fits": [
+    {
+      "decision_date": "2018-05-28 00:00:00",
+      "n": "4800",
+      "first_row": "2000-01-03 00:00:00",
+      "last_row": "2018-05-25 00:00:00",
+      "last_return_date": "2018-05-28 00:00:00"
+    }
+  ],
+  "n_belief_fits": 1,
+  "first_belief_model": {
+    "mean": [
+      0.000131281531234477,
+      0.0004108329139829701,
+      0.0003831827843797712,
+      0.00041769836496376037
+    ],
+    "cov": [
+      [
+        0.00012229574129838788,
+        4.5202035349713497e-07,
+        1.2417822537222028e-06,
+        1.3853360252444383e-06
+      ],
+      [
+        4.5202035349713497e-07,
+        9.649889113391084e-07,
+        4.7610439878868916e-07,
+        4.882354453301474e-07
+      ],
+      [
+        1.2417822537222028e-06,
+        4.7610439878868916e-07,
+        9.774400896926328e-07,
+        4.886606695022098e-07
+      ],
+      [
+        1.3853360252444383e-06,
+        4.882354453301474e-07,
+        4.886606695022098e-07,
+        9.969008036350337e-07
+      ]
+    ],
+    "meta": {
+      "method": "ledoit_wolf",
+      "n": "4800",
+      "shrinkage": "0.0028976000255081596",
+      "eig_min_raw": "0.4950458270206801",
+      "n_eig_floored": "0",
+      "duplicates": "()"
+    }
+  },
+  "nan_counts": {
+    "predicted_value": 12800,
+    "voi_next_1": 4817,
+    "revealed_A": 6454,
+    "revealed_B": 5457
+  }
+}

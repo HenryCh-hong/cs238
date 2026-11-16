@@ -66,6 +66,8 @@ def fig_cumulative() -> list[str]:
                 ax.plot(wide.index, ((wide[pol] - base) * 1e4).cumsum(), color=POLICY_COLORS[pol],
                         linestyle=POLICY_STYLE[pol][0], label=POLICY_LABELS[pol])
         ax.axhline(0, color=INK2, linewidth=0.8)
+        ax.text(0.01, 0.02, "fixed-order and myopic VOI overlap optimal VOI where hidden", transform=ax.transAxes,
+                fontsize=7, color=INK2)
         lam = path.name.split("_")[1].replace("lam", "")
         ax.set_title(f"λ = {lam}: cumulative net utility minus free-only")
         ax.set_ylabel("bp of capital (cumulative)")
@@ -126,16 +128,22 @@ def fig_calibration() -> list[str]:
     fig, axes = plt.subplots(1, len(lams), figsize=(5.2 * len(lams), 4.0), squeeze=False)
     for ax, lam in zip(axes[0], lams):
         s = t[t["lam"] == lam]
-        lo = min(s["pred_mean_bp"].min(), s["real_ci_lo_bp"].min(), 0)
-        hi = max(s["pred_mean_bp"].max(), s["real_ci_hi_bp"].max())
-        ax.plot([lo, hi], [lo, hi], color=INK2, linewidth=0.8, label="realized = predicted")
-        for k, (arm, g) in enumerate(s.groupby("arm", sort=False)):
-            x = g["pred_mean_bp"].to_numpy(dtype=float) * (1 + 0.01 * (k - 1))  # tiny dodge
+        # x range follows the predictions; the diagonal is drawn over that range only
+        xlo, xhi = 0.0, float(s["pred_mean_bp"].max())
+        pad = 0.08 * (xhi - xlo or 1.0)
+        width = xhi - xlo or 1.0
+        ax.plot([xlo - pad, xhi + pad], [xlo - pad, xhi + pad], color=INK2, linewidth=0.8, label="realized = predicted")
+        for k, arm in enumerate(("A", "B", "AB")):
+            g = s[s["arm"] == arm]
+            if g.empty:
+                continue
+            x = g["pred_mean_bp"].to_numpy(dtype=float) + 0.012 * width * (k - 1)  # small absolute dodge
             y = g["real_mean_bp"].to_numpy(dtype=float)
             yerr = np.vstack([y - g["real_ci_lo_bp"].to_numpy(dtype=float), g["real_ci_hi_bp"].to_numpy(dtype=float) - y])
             ax.errorbar(x, y, yerr=yerr, fmt="o", markersize=5, color=ARM_COLORS[arm], ecolor=ARM_COLORS[arm],
                         elinewidth=1, capsize=0, label=ARM_LABELS[arm])
         ax.axhline(0, color=GRID, linewidth=0.8)
+        ax.set_xlim(xlo - pad, xhi + pad)
         ax.set_title(f"λ = {lam:g}: VOI calibration (quintiles of predicted VOI)")
         ax.set_xlabel("predicted gross VOI (bp, bin mean)")
         ax.set_ylabel("realized paired improvement (bp, mean ± 95% CI)")
@@ -161,10 +169,15 @@ def fig_calsize() -> list[str]:
             ls, mk = POLICY_STYLE[pol]
             ax.plot(g["calibration_days"], g["mean_diff_bp"], marker=mk, markersize=4.5, linestyle=ls,
                     color=POLICY_COLORS[pol], label=POLICY_LABELS[pol])
-            ax.fill_between(g["calibration_days"], g["ci_lo_bp"], g["ci_hi_bp"], color=POLICY_COLORS[pol],
-                            alpha=0.12, linewidth=0)
+            if pol == "optimal_voi":  # one band; both policies' CIs are in exp4_calibration_size.csv
+                ax.fill_between(g["calibration_days"], g["ci_lo_bp"], g["ci_hi_bp"], color=POLICY_COLORS[pol],
+                                alpha=0.15, linewidth=0, label="95% CI (optimal VOI)")
         ax.axhline(0, color=INK2, linewidth=0.8)
         ax.set_xscale("log")
+        ticks = sorted(s["calibration_days"].unique())
+        ax.set_xticks(ticks)
+        ax.set_xticklabels([f"{int(v):,}" for v in ticks])
+        ax.minorticks_off()
         ax.set_title(f"λ = {lam:g}: effect of calibration sample size")
         ax.set_xlabel("calibration rows used to fit the belief (log scale)")
         ax.set_ylabel("net utility minus free-only (bp/date)")

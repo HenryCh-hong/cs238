@@ -223,7 +223,7 @@ def validate_prices(
     hl = np.asarray(vals["High"] < vals["Low"])
     if hl.any():
         rep.errors.append(f"{int(hl.sum())} rows with High < Low, e.g. {_fmt_dates(idx[hl])}")
-    weekend = np.asarray(idx.dayofweek >= 5)
+    weekend = np.asarray(idx.day_of_week >= 5)
     if weekend.any():
         rep.errors.append(f"{int(weekend.sum())} weekend dates, e.g. {_fmt_dates(idx[weekend])}")
 

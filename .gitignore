@@ -12,3 +12,4 @@ data/processed/*.parquet
 !data/**/.gitkeep
 results/logs/*.csv
 results/logs/*.csv.gz
+.claude/

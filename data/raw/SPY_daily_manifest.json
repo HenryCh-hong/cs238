@@ -1,0 +1,23 @@
+{
+  "auto_adjust": false,
+  "columns": [
+    "Open",
+    "High",
+    "Low",
+    "Close",
+    "Adj Close",
+    "Volume"
+  ],
+  "csv_file": "SPY_daily.csv",
+  "download_utc": "2026-11-15T22:13:15Z",
+  "end_requested_inclusive": "2026-11-13",
+  "first_date": "1993-01-29",
+  "last_date": "2026-11-13",
+  "rows": 8507,
+  "sha256": "2da4f59da617ee5251978b2b79a33402bf49ea568f49ffb9be72fe00e3be036d",
+  "source": "Yahoo Finance via yfinance",
+  "start_requested": "1993-01-29",
+  "ticker": "SPY",
+  "yfinance_end_argument_exclusive": "2026-11-14",
+  "yfinance_version": "1.3.0"
+}

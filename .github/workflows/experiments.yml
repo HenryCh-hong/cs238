@@ -1,0 +1,71 @@
+name: replay-and-experiments
+
+# Heavy compute runs here, not on the development laptop.
+# Trigger: gh workflow run experiments.yml -f archive_run_id=<run id of a pipeline.yml "archive" run> -f only=exp0,exp1,exp2,exp3,exp4
+on:
+  workflow_dispatch:
+    inputs:
+      archive_run_id:
+        description: "Run id whose 'forecast-archive' artifact to reuse (empty = rebuild the archive here)"
+        required: false
+        default: ""
+      only:
+        description: "Comma-separated experiments to run"
+        required: false
+        default: "exp0,exp1,exp2,exp3,exp4"
+      max_dates:
+        description: "Limit evaluation dates (0 = all)"
+        required: false
+        default: "0"
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Download archive artifact
+        if: ${{ inputs.archive_run_id != '' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: forecast-archive
+          run-id: ${{ inputs.archive_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: data
+      - name: Build archive (no artifact given)
+        if: ${{ inputs.archive_run_id == '' }}
+        run: python -m experiments.build_archive --config configs/default.toml --n-jobs -1
+      - name: Archive summary
+        run: |
+          ls -la data/raw data/processed
+          python -c "import pandas as pd; a=pd.read_csv('data/processed/forecast_archive.csv'); print(a.shape); print(a.head(3).T); print(a.tail(3).T)"
+      - name: Unit tests
+        run: python -m pytest -q
+      - name: Milestone B replay (default config)
+        run: python -m experiments.run_replay --config configs/default.toml --tag default --max-dates ${{ inputs.max_dates }}
+      - name: Experiments
+        run: python -m experiments.run_experiments --only ${{ inputs.only }} --workers 4 --max-dates ${{ inputs.max_dates }}
+      - name: Figures
+        run: python -m experiments.make_figures
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: replay-results
+          path: |
+            results/
+            data/processed/
+            data/raw/*manifest*.json
+          retention-days: 30

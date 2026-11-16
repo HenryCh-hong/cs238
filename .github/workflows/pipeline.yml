@@ -1,0 +1,54 @@
+name: pipeline
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    if: github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip && pip install -r requirements.txt
+      - name: Unit tests
+        run: python -m pytest
+
+  archive:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip && pip install -r requirements.txt
+      - name: Build walk-forward forecast archive (full)
+        run: python -m experiments.build_archive --config configs/default.toml --n-jobs -1
+      - name: Upload raw and processed data
+        uses: actions/upload-artifact@v4
+        with:
+          name: forecast-archive
+          # the raw Yahoo price file stays out of the (publicly downloadable) artifact; its sha256 is in the manifest
+          path: |
+            data/raw/*manifest*.json
+            data/processed
+          retention-days: 30
+      # ---------------------------------------------------------------------
+      # INTEGRATION STEPS (replay / experiments) are appended below this line.
+      # Each step should depend on the archive produced above and run with
+      # the same environment (OMP/OPENBLAS threads are unconstrained on CI).
+      # ---------------------------------------------------------------------

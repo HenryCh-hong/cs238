@@ -1,0 +1,23 @@
+rho=0.02: E[g]=1.0290e-05  mean d=8.5899e-06  mean h=1.0330e-05  sd_d=3.6113e-03  sd_g=1.3375e-05  sd_resid_raw=3.6112e-03  sd_resid_RB=3.3097e-05  VRF_mean=10227.85  VRF_resid=11905.18
+       B3a N(detect mean)=9.668e+05  power@1250=0.051 power@2500=0.052   B3b N(slope 1 vs 0)=5.722e+05  power@1250=0.052  power@2500=0.054
+       B4 N(slope halfwidth 0.1) raw=1.120e+08  RB=9.409e+03
+rho=0.05: E[g]=4.0042e-05  mean d=4.7173e-05  mean h=3.9881e-05  sd_d=5.0288e-03  sd_g=2.8219e-05  sd_resid_raw=5.0287e-03  sd_resid_RB=9.1356e-05  VRF_mean=2767.68  VRF_resid=3029.97
+       B3a N(detect mean)=1.238e+05  power@1250=0.059 power@2500=0.068   B3b N(slope 1 vs 0)=2.492e+05  power@1250=0.055  power@2500=0.059
+       B4 N(slope halfwidth 0.1) raw=4.880e+07  RB=1.610e+04
+rho=0.1: E[g]=3.7043e-04  mean d=3.7232e-04  mean h=3.7097e-04  sd_d=8.9069e-03  sd_g=1.1055e-04  sd_resid_raw=8.9063e-03  sd_resid_RB=5.7488e-04  VRF_mean=231.31  VRF_resid=240.02
+       B3a N(detect mean)=4.538e+03  power@1250=0.313 power@2500=0.548   B3b N(slope 1 vs 0)=5.094e+04  power@1250=0.072  power@2500=0.095
+       B4 N(slope halfwidth 0.1) raw=9.973e+06  RB=4.155e+04
+rho=0.2: E[g]=1.2888e-03  mean d=1.2870e-03  mean h=1.2925e-03  sd_d=1.0831e-02  sd_g=1.7881e-04  sd_resid_raw=1.0830e-02  sd_resid_RB=1.7530e-03  VRF_mean=37.78  VRF_resid=38.16
+       B3a N(detect mean)=5.543e+02  power@1250=0.988 power@2500=1.000   B3b N(slope 1 vs 0)=2.879e+04  power@1250=0.090  power@2500=0.131
+       B4 N(slope halfwidth 0.1) raw=5.636e+06  RB=1.477e+05
+rho=0.4: E[g]=3.2488e-03  mean d=3.2554e-03  mean h=3.2507e-03  sd_d=1.1178e-02  sd_g=2.1199e-04  sd_resid_raw=1.1177e-02  sd_resid_RB=4.1309e-03  VRF_mean=7.30  VRF_resid=7.32
+       B3a N(detect mean)=9.292e+01  power@1250=1.000 power@2500=1.000   B3b N(slope 1 vs 0)=2.182e+04  power@1250=0.103  power@2500=0.158
+       B4 N(slope halfwidth 0.1) raw=4.271e+06  RB=5.835e+05
+
+B3(c) optimal minus myopic (two-source, true model), per day:
+   rho=0.02: mean=+0.000e+00 (MC se 0.0e+00) sd/day=0.000e+00  N_detect=inf  power@1250=nan  power@2500=nan  days differing=0.0000
+   rho=0.05: mean=+0.000e+00 (MC se 0.0e+00) sd/day=0.000e+00  N_detect=inf  power@1250=nan  power@2500=nan  days differing=0.0000
+   rho=0.1: mean=+8.268e-07 (MC se 4.8e-07) sd/day=1.070e-04  N_detect=1.315e+05  power@1250=0.059  power@2500=0.067  days differing=0.0204
+   rho=0.2: mean=+0.000e+00 (MC se 0.0e+00) sd/day=0.000e+00  N_detect=inf  power@1250=nan  power@2500=nan  days differing=0.0000
+   rho=0.4: mean=+0.000e+00 (MC se 0.0e+00) sd/day=0.000e+00  N_detect=inf  power@1250=nan  power@2500=nan  days differing=0.0000
+saved

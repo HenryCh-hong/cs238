@@ -1,0 +1,26 @@
+configs = 1728
+configs with positive mean VOI (V_opt - G > 1e-12): 1666
+adapt: min=-1.361e-10, max=2.820e-04, negative count (< -1e-12) = 201
+mean adapt (over grid) = 2.338830e-05 real units; mean VOI = 8.604022e-04
+RATIO of grid means: sum(adapt)/sum(VOI) = 0.0272
+among configs with VOI>0 (n=1666): mean of per-config fraction = 0.0353; median = 0.0061; 10%/90% = -0.0000/0.1296; max = 0.5917
+adapt / V_opt (VOI>0 configs): mean = 7.696e-03, max = 8.711e-02
+m-weighted share of states where the optimal policy makes a first purchase = 0.7320 (per config average)
+Among first-purchase states (m-weighted): second purchase depends on z1 = 0.7323, always buys second = 0.0000, never buys second = 0.2677
+configs where the second purchase depends on the first observation for some m (weight > 1e-9): 1135/1728 = 0.657
+  among VOI>0 configs: 1135/1666 = 0.681
+mean adapt/VOI by kappa: -0.5: 0.0481, 0.0: 0.0365, 0.5: 0.0213
+mean adapt/VOI by lam: 1.0: 0.0387, 5.0: 0.0319
+mean adapt/VOI by tau_bp: 1.0: 0.0389, 5.0: 0.0316
+mean adapt/VOI by (min,max) cost (bp): (0.1, 0.1): 0.0046, (0.1, 1.0): 0.0232, (0.1, 10.0): 0.0432, (1.0, 1.0): 0.0304, (1.0, 10.0): 0.0427, (10.0, 10.0): 0.0789
+mean adapt/VOI by max(rho): 0.05: 0.0354, 0.1: 0.0192, 0.2: 0.0503, 0.4: 0.0310
+largest fraction configs (top 5):
+  lam=5.0 tau=1.0bp rho=(0.1,0.2) kappa=-0.5 c=(10.0,10.0)bp adapt=2.272e-05 VOI=3.839e-05 frac=0.5917
+  lam=5.0 tau=1.0bp rho=(0.2,0.1) kappa=-0.5 c=(10.0,10.0)bp adapt=2.272e-05 VOI=3.839e-05 frac=0.5917
+  lam=1.0 tau=5.0bp rho=(0.2,0.1) kappa=-0.5 c=(10.0,10.0)bp adapt=2.266e-05 VOI=3.909e-05 frac=0.5796
+  lam=1.0 tau=5.0bp rho=(0.1,0.2) kappa=-0.5 c=(10.0,10.0)bp adapt=2.266e-05 VOI=3.909e-05 frac=0.5796
+  lam=1.0 tau=1.0bp rho=(0.1,0.2) kappa=-0.5 c=(10.0,10.0)bp adapt=2.953e-05 VOI=7.516e-05 frac=0.3929
+example config list with VOI>0 and largest absolute adaptivity (top 3):
+  lam=1.0 tau=1.0bp rho=(0.4,0.4) kappa=0.0 c=(10.0,0.1)bp adapt=2.820e-04 VOI=1.987e-03 frac=0.1419
+  lam=1.0 tau=1.0bp rho=(0.4,0.4) kappa=0.0 c=(0.1,10.0)bp adapt=2.820e-04 VOI=1.987e-03 frac=0.1419
+  lam=1.0 tau=1.0bp rho=(0.1,0.4) kappa=-0.5 c=(10.0,0.1)bp adapt=2.818e-04 VOI=1.826e-03 frac=0.1544

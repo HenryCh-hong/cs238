@@ -13,3 +13,4 @@ data/processed/*.parquet
 results/logs/*.csv
 results/logs/*.csv.gz
 .claude/
+pilots/_cache/

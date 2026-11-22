@@ -1,0 +1,16 @@
+T2 mean-variance vs quadratic expected utility
+  parameters: s=0.01, lam=3.0, tau=0.0, qprev=0, m=0.02, v=0.0001, rho=0.1, Delta=1e-06, v'=9.9e-05
+  chosen position now (quadratic and MV agree, q*=1): MV J(1|b)=0.0197, U(1|b)=0.0185
+  Mean-variance: max_q J(q|b) = 0.0197
+  Mean-variance: E[max_q J(q|b')] = 0.019703
+  Mean-variance 'information value' VOI_MV = E[max J(b')] - max J(b) = 3.000000e-06
+  analytic: lam*Delta = 3.000000e-06   (E[s'^2]=v'=9.9e-05 < v=0.0001)
+  Quadratic EU: max_q U(q|b) = 0.0185
+  Quadratic EU: E[max_q U(q|b')] (closed form) = 0.0185
+  Quadratic EU VOI = 3.469447e-18  (float noise scale ~ 3.47e-18)
+  Tower property check (E over m' of each fixed-q utility, before vs after):
+    q=-1: E[U(q|b)] = -0.0215, E[U(q|b')] = -0.0215, diff = 0.00e+00
+    q=+0: E[U(q|b)] = 0, E[U(q|b')] = 0, diff = 0.00e+00
+    q=+1: E[U(q|b)] = 0.0185, E[U(q|b')] = 0.0185, diff = 0.00e+00
+  Switch threshold for quadratic q=1 vs q=0: m' = 0.000297265 ; P(m' < threshold) = 1.021e-86
+  i.e. the quadratic VOI can only come from the switch region, mass 1.0e-86

@@ -1,0 +1,88 @@
+====================================================================================================
+A3: both one-step VOIs negative, optimal policy queries (designed exact instance)
+====================================================================================================
+
+[A3 designed instance] s = 1 units
+  parameters: rho1=0.15, rho2=0.22, kappa=0.68, lam=0.03, tau=0.008, m=0.575, qprev=0
+  costs: c1=2e-05, c2=0.0008
+  Delta_1=0.0225  Delta_2=0.0484  Delta_21=0.02590029762  Delta_12=2.976190476e-07
+  G(b)                                 = +5.270812500000e-01
+  one-step net VOI_1 = g(D1)-c1        = -1.300760958332e-05   (g(D1) = 6.992390e-06)
+  one-step net VOI_2 = g(D2)-c2        = -1.025902125614e-04   (g(D2) = 6.974098e-04)
+  branch: query 1, then optional 2     = +5.275865491277e-01   (minus G: +5.052991e-04)
+  branch: query 2, then optional 1     = +5.269786738531e-01   (minus G: -1.025761e-04)
+  V_opt = +5.275865491277e-01; V_myopic = +5.270812500000e-01; regret = +5.052991e-04
+  myopic policy: stop; optimal: query (first = 1)
+  real units s=0.01: lam=3, tau=8e-05 (=0.8 bp), m=5.7500e-03, c1=2.0000e-07, c2=8.0000e-06
+    G=+5.270812e-03  V_opt=+5.275865e-03  V_opt/s=+5.275865491277e-01 (matches s=1 value +5.275865491277e-01)
+
+Non-concavity check: gross VOI g(Delta) at the designed belief (s = 1)
+  Delta = 0.001: g = 0.000000e+00
+  Delta = 0.01: g = 6.853861e-10
+  Delta = 0.015: g = 1.526492e-07
+  Delta = 0.02: g = 2.616544e-06
+  Delta = 0.025: g = 1.562737e-05
+  Delta = 0.03: g = 5.422010e-05
+  Delta = 0.04: g = 2.803383e-04
+  Delta = 0.05: g = 8.049300e-04
+  Delta = 0.1: g = 8.917652e-03
+  g(D1) + g(D21)  = 2.716680e-05   vs   g(D1 + D21) = 6.974289e-04  (D1+D21 = D_both)
+  g(D2) + g(D12)  = 6.974098e-04   vs   g(D2 + D12) = 6.974289e-04
+  Delta_1 = 0.02250 and Delta_21 = 0.02590: each alone is below the threshold of g (g = 0 for Delta <~ 0.01), but their sum is above it.
+
+====================================================================================================
+A4: both one-step VOIs positive, optimal first query differs from the myopic argmax
+====================================================================================================
+
+[A4 designed instance] s = 1 units
+  parameters: rho1=0.15, rho2=0.22, kappa=0.68, lam=0.03, tau=0.008, m=0.575, qprev=0
+  costs: c1=5e-06, c2=0.00065
+  Delta_1=0.0225  Delta_2=0.0484  Delta_21=0.02590029762  Delta_12=2.976190476e-07
+  G(b)                                 = +5.270812500000e-01
+  one-step net VOI_1 = g(D1)-c1        = +1.992390416682e-06   (g(D1) = 6.992390e-06)
+  one-step net VOI_2 = g(D2)-c2        = +4.740978743860e-05   (g(D2) = 6.974098e-04)
+  branch: query 1, then optional 2     = +5.276213267930e-01   (minus G: +5.400768e-04)
+  branch: query 2, then optional 1     = +5.271286772886e-01   (minus G: +4.742729e-05)
+  V_opt = +5.276213267930e-01; V_myopic = +5.271286772886e-01; regret = +4.926495e-04
+  myopic policy: query 2; optimal: query (first = 1)
+  real units s=0.01: lam=3, tau=8e-05 (=0.8 bp), m=5.7500e-03, c1=5.0000e-08, c2=6.5000e-06
+    G=+5.270812e-03  V_opt=+5.276213e-03  V_opt/s=+5.276213267930e-01 (matches s=1 value +5.276213267930e-01)
+
+====================================================================================================
+Random-search frequencies
+====================================================================================================
+
+Random search over 1500 feasible models (log-uniform lam in [0.01,1], tau in [1e-3,0.3], costs in [1e-6,1e-1], m within +-0.6 of the boundary, s=1):
+  both one-step VOI<0 and V_opt>G (A3-type): 50 (3.333%)
+  both one-step VOI>0 and argmax mismatch (A4-type): 129 (8.600%)
+  first random A3-type example (exact re-check below): rho1=0.3731, rho2=0.0402, kappa=+0.9372, lam=0.3149, tau=0.0021, m=0.5429, c1=8.695e-02, c2=3.586e-05, V_opt-G=2.585e-01
+
+[A3 first random example] s = 1 units
+  parameters: rho1=0.373082117852098, rho2=0.0402336856044056, kappa=0.9372188096836446, lam=0.3148911039314705, tau=0.0020938899559482414, m=0.5428887925370108, qprev=0
+  costs: c1=0.086948, c2=3.58566e-05
+  Delta_1=0.1391902667  Delta_2=0.001618749457  Delta_21=0.7872362477  Delta_12=0.9248077649
+  G(b)                                 = +1.330964974617e-01
+  one-step net VOI_1 = g(D1)-c1        = -3.165168052432e-02   (g(D1) = 5.529629e-02)
+  one-step net VOI_2 = g(D2)-c2        = -3.584533960462e-05   (g(D2) = 1.128603e-08)
+  branch: query 1, then optional 2     = +3.916055935657e-01   (minus G: +2.585091e-01)
+  branch: query 2, then optional 1     = +3.916055935657e-01   (minus G: +2.585091e-01)
+  V_opt = +3.916055935657e-01; V_myopic = +1.330964974617e-01; regret = +2.585091e-01
+  myopic policy: stop; optimal: query (first = 1)
+  real units s=0.01: lam=31.49, tau=2.094e-05 (=0.209 bp), m=5.4289e-03, c1=8.6948e-04, c2=3.5857e-07
+    G=+1.330965e-03  V_opt=+3.916056e-03  V_opt/s=+3.916055935657e-01 (matches s=1 value +3.916055935657e-01)
+  first random A4-type example: rho1=0.4691, rho2=0.6544, kappa=-0.1536, lam=0.1236, tau=0.0028, m=-0.3932, c1=9.213e-05, c2=4.686e-03
+
+[A4 first random example] s = 1 units
+  parameters: rho1=0.4690651819601297, rho2=0.6544361164962865, kappa=-0.15358112107207073, lam=0.12356087718121625, tau=0.0028445724877742664, m=-0.39324670344094614, qprev=0
+  costs: c1=9.21319e-05, c2=0.0046856
+  Delta_1=0.2200221449  Delta_2=0.4282866306  Delta_21=0.5405161446  Delta_12=0.332251659
+  G(b)                                 = +2.477334327776e-01
+  one-step net VOI_1 = g(D1)-c1        = +1.111854588721e-01   (g(D1) = 1.112776e-01)
+  one-step net VOI_2 = g(D2)-c2        = +2.185278977397e-01   (g(D2) = 2.232135e-01)
+  branch: query 1, then optional 2     = +6.155422236730e-01   (minus G: +3.678088e-01)
+  branch: query 2, then optional 1     = +6.155387993544e-01   (minus G: +3.678054e-01)
+  V_opt = +6.155422236730e-01; V_myopic = +6.155387993544e-01; regret = +3.424319e-06
+  myopic policy: query 2; optimal: query (first = 1)
+  real units s=0.01: lam=12.36, tau=2.845e-05 (=0.284 bp), m=-3.9325e-03, c1=9.2132e-07, c2=4.6856e-05
+    G=+2.477334e-03  V_opt=+6.155422e-03  V_opt/s=+6.155422236730e-01 (matches s=1 value +6.155422236730e-01)
+exit=0

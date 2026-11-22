@@ -1,0 +1,93 @@
+====================================================================================================
+A7(i): structural statements on random models (dense trapezoid, tolerance 1e-10)
+====================================================================================================
+  random models: 3000; with some one-step VOI_j > 0: 2533   (integrator: dense trapezoid)
+  violations of 'VOI_j>0 => optimal does not stop': 0
+  min over those of [V_opt - G - max_j VOI_j] (should be >= 0): -1.226e-07  (dense-trapezoid discretization noise, ~1e-7 absolute at these magnitudes)
+  violations of V_opt >= V_myopic: 0
+  cases where myopic stops (all VOI_j<=0) but optimal queries (V_opt - V_myopic > 1e-7): 93
+    gap sizes: min 2.076e-04, median 1.806e-02, max 2.592e-01
+  Second-stage claim: once one source is observed, V(b_j,{k}) = max(G, -c_k + E G) is exactly the one-step rule, so the two policies coincide after the first query (identity, not a numerical fit).
+
+====================================================================================================
+A7(ii): pruning bound gross_j <= L(m) * sqrt(2 Delta/pi), L(m) = 1 + 2 lam |m| + sqrt(2pi) lam s
+====================================================================================================
+  checked 4000 random (m, Delta, lam, tau) with s = 1; max ratio gross/bound = 0.9287
+  worst case: m=-0.0004, Delta=9.477e-01, lam=0.0115, tau=0.0234: gross=7.4208e-01, bound=7.9903e-01
+  at the boundary m=0.0380: Delta=1.0e-04: gross=3.9803e-03, bound=8.5971e-03, ratio=0.4630
+  at the boundary m=0.0380: Delta=1.0e-03: gross=1.2671e-02, bound=2.7186e-02, ratio=0.4661
+  at the boundary m=0.0380: Delta=1.0e-02: gross=5.2676e-02, bound=8.5971e-02, ratio=0.6127
+  at the boundary m=0.0380: Delta=2.2e-02: gross=8.9041e-02, bound=1.2896e-01, ratio=0.6905
+
+  Uniform (state-independent) bound K(Delta) = sup_m gross(m; Delta), lam=0.03, tau=0.008, s=1:
+    Delta=1.00e-04: K = 3.977034e-03 attained at m=-0.0380
+    Delta=1.00e-03: K = 1.266800e-02 attained at m=-0.0380
+    Delta=1.00e-02: K = 5.267088e-02 attained at m=-0.0380
+    Delta=2.25e-02: K = 8.903612e-02 attained at m=-0.0380
+    Delta=4.84e-02: K = 1.424862e-01 attained at m=-0.0380
+    Delta=1.00e-01: K = 2.176233e-01 attained at m=+0.0380
+  Never-worth-querying (one-step, every state): if c_j >= K(Delta_j) then VOI_j <= 0 at every belief;
+  sufficient at the current belief: c_j >= L(m) * sqrt(2 Delta_j / pi).
+
+====================================================================================================
+A7(iii): E[u(q,r)] under N(m, v) and the stop value
+====================================================================================================
+  q=-1: MC E[u] = -7.9231084921e-04 (s.e. 7.1e-06); formula = -8.0032000000e-04; diff/s.e. = +1.13
+  q=+0: MC E[u] = +0.0000000000e+00 (s.e. 0.0e+00); formula = +0.0000000000e+00; diff/s.e. = +nan
+  q=+1: MC E[u] = -8.3323492188e-06 (s.e. 7.1e-06); formula = -3.2000000000e-07; diff/s.e. = -1.13
+  Penalty term: lam q^2 E[r^2] = lam q^2 (m^2 + v): contains m^2, so it is a second-moment penalty.
+  A pure variance penalty would replace m^2 + v by v; decisions then differ when |m| is not tiny:
+    second-moment (model)   : trade threshold m* = 0.100505
+    variance-only           : trade threshold m* = 0.100000
+    (model boundary root from quadratic = 0.100505)
+  Stop value depends only on (m, v): E over r of u depends on r only through E r and E r^2 (quadratic utility).
+
+====================================================================================================
+A7(iv): is a budget B redundant when two sources are each queryable once?
+====================================================================================================
+  instance: c1=2.0e-05, c2=8.0e-04, c1+c2=8.200000e-04, m=0.575
+    B=0.000000e+00: V_B = +5.270812500000e-01
+    B=2.000000e-05: V_B = +5.270812500000e-01
+    B=4.200000e-04: V_B = +5.270812500000e-01
+    B=8.199990e-04: V_B = +5.270812500000e-01
+    B=8.200000e-04: V_B = +5.275865491278e-01
+    B=1.640000e-03: V_B = +5.275865491278e-01
+  unconstrained V_opt = +5.275865491277e-01
+  Answer: B >= c1 + c2 never binds (total spend of any policy is at most c1 + c2). B < c1 + c2 can bind; here it removes the optional second query and the value falls to G.
+
+====================================================================================================
+A7(v): gross VOI >= 0 ?
+====================================================================================================
+  min gross VOI over 20000 random (m, Delta, lam, tau, qprev) draws = -4.441e-16 (numerical noise level ~1e-17 relative to G)
+  Proof: G(b) = max_q E_b[u(q,r)] and E_b[ E_{b'}[u(q,r)] ] = E_b[u(q,r)] (martingale mean; E[m'^2 + v'] = m^2 + v). Max of expectations <= expectation of max (Jensen), so E G(b') >= G(b).
+
+====================================================================================================
+A7(vi): trivial regimes (s = 1, qprev = 0)
+====================================================================================================
+  Trade is strictly optimal for belief (m, v) iff lam m^2 - m + (lam v + tau) < 0. The discriminant
+  disc(v) = 1 - 4 lam (lam v + tau) decreases in v, and posterior variances v = 1 - Delta are <= 1.
+  Hence if 4 lam tau >= 1 there is no trade for ANY posterior variance in [0,1] and every VOI is 0.
+  Caution: G(b) = 0 at the prior (disc(1) <= 0) does NOT make VOI zero, because observing a source
+  lowers the variance and can open a trade region (demonstrated below).
+  lam=0.5, tau=0.0: 4*lam*tau=0.000; max_m G(m;prior)=0.000e+00; max over Delta in (0,0.99] and m of gross VOI = 3.161e-01
+  lam=1.0, tau=0.25: 4*lam*tau=1.000; max_m G(m;prior)=0.000e+00; max over Delta in (0,0.99] and m of gross VOI = 0.000e+00
+  lam=1.0, tau=0.1: 4*lam*tau=0.400; max_m G(m;prior)=0.000e+00; max over Delta in (0,0.99] and m of gross VOI = 4.885e-02
+  lam=0.05, tau=0.05: 4*lam*tau=0.010; max_m G(m;prior)=2.450e+00; max over Delta in (0,0.99] and m of gross VOI = 6.984e-01
+  lam=0.05, tau=0.5: 4*lam*tau=0.100; max_m G(m;prior)=2.000e+00; max over Delta in (0,0.99] and m of gross VOI = 4.386e-01
+  Large lam: trade needs posterior variance v > (1-4 lam tau)/(4 lam^2) ... i.e. v below the trade
+  threshold v* = (1 - 4 lam tau)/(4 lam^2); with lam=5, tau=0.001 (s=1), v* = 0.0098:
+  only sources with Delta > 1 - v* (near-full revelation) can have nonzero VOI for a belief in that range.
+  Large tau (lam=0.05): the smallest |m| with positive trade value (s units) rises with tau:
+    tau=0.01: smallest |m| with trade value = 0.0602  (boundary ~ lam + tau = 0.060)
+    tau=0.1: smallest |m| with trade value = 0.1512  (boundary ~ lam + tau = 0.150)
+    tau=0.5: smallest |m| with trade value = 0.5661  (boundary ~ lam + tau = 0.550)
+    tau=1.0: smallest |m| with trade value = 1.1119  (boundary ~ lam + tau = 1.050)
+  Tiny Delta far from the boundary: gross VOI is exponentially small in (distance/sd):
+    m=0.575, Delta=1e-04: gross = 0.000e+00
+    m=0.575, Delta=1e-03: gross = 0.000e+00
+    m=0.575, Delta=1e-02: gross = 6.854e-10
+  Tiny Delta at the boundary: gross VOI ~ sqrt(Delta) (first-order kink effect):
+    Delta 1e-08 -> 1e-07: gross 3.980e-05 -> 1.259e-04, local log-slope = 0.500
+    Delta 1e-07 -> 1e-06: gross 1.259e-04 -> 3.980e-04, local log-slope = 0.500
+    Delta 1e-06 -> 1e-05: gross 3.980e-04 -> 1.259e-03, local log-slope = 0.500
+exit=0

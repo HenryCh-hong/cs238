@@ -1,0 +1,8 @@
+configs checked: 150
+first-purchase m-weight: 109.0492
+  never: 0.2684 of first-purchase m-weight
+  always: 0.0000 of first-purchase m-weight
+  interior_1e-6: 0.7316 of first-purchase m-weight
+  dependent_any: 0.7316 of first-purchase m-weight
+configs with a genuine z-dependent second purchase (P_z(B) in (1e-6,1-1e-6) at some m): 97 / 150
+P_z(buy second | first purchase, m) among dependent states: quantiles 5/25/50/75/95% = [0.0433 0.1827 0.4021 0.7518 0.9899]

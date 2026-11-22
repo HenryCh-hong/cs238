@@ -1,0 +1,78 @@
+====================================================================================================
+CASE: base (realistic, positively correlated errors)
+  s=0.01, lam=2.0, tau=0.0002, qprev=0.0; rho1=0.05, rho2=0.08, kappa=0.3, c1=5e-05, c2=0.0001
+  Delta_1=2.500000e-07  Delta_2=6.400000e-07  Delta_21=4.642857e-07  Delta_12=7.428571e-08  Delta_both=7.142857e-07  (s^2=1.000000e-04)
+  --- belief m=4.0e-4 (at boundary): G(b) = 0.0000000000e+00
+    never acquire                      +0.000000000000e+00
+    always both                        +2.642892102911e-04
+    fixed 1 then 2 (optimal stop)      +2.715822732392e-04   [GH400 - quad = -8.50e-09]
+    fixed 2 then 1 (optimal stop)      +2.915057061323e-04   [GH400 - quad = +8.90e-08]
+    myopic VOI                         +2.915057061323e-04   [GH400 - quad = +8.90e-08]
+    exact optimal (Bellman)            +2.915057061323e-04   [GH400 - quad = +8.90e-08]
+    one-step VOI_1 = +1.605955e-04, VOI_2 = +2.850852e-04; myopic first = 2
+    open-loop (non-adaptive) candidates: none: +0.000000e+00, {1}: +1.605955e-04, {2}: +2.850852e-04, {1,2}: +2.642892e-04
+    best open-loop set = {2} (+2.850852e-04); value of adaptivity V_opt - open-loop = +6.421e-06
+    myopic regret V_opt - V_myopic = +0.000e+00  (myopic == optimal)
+  --- belief m=6.0e-4: G(b) = 1.9928000000e-04
+    never acquire                      +1.992800000000e-04
+    always both                        +3.445345434511e-04
+    fixed 1 then 2 (optimal stop)      +3.582443237368e-04   [GH400 - quad = +1.51e-08]
+    fixed 2 then 1 (optimal stop)      +3.741824344090e-04   [GH400 - quad = -2.59e-08]
+    myopic VOI                         +3.741824344090e-04   [GH400 - quad = -2.59e-08]
+    exact optimal (Bellman)            +3.741824344090e-04   [GH400 - quad = -2.59e-08]
+    one-step VOI_1 = +6.933903e-05, VOI_2 = +1.691982e-04; myopic first = 2
+    open-loop (non-adaptive) candidates: none: +1.992800e-04, {1}: +2.686190e-04, {2}: +3.684782e-04, {1,2}: +3.445345e-04
+    best open-loop set = {2} (+3.684782e-04); value of adaptivity V_opt - open-loop = +5.704e-06
+    myopic regret V_opt - V_myopic = +0.000e+00  (myopic == optimal)
+====================================================================================================
+CASE: base, cheaper sources
+  s=0.01, lam=2.0, tau=0.0002, qprev=0.0; rho1=0.05, rho2=0.08, kappa=0.3, c1=1e-05, c2=2e-05
+  Delta_1=2.500000e-07  Delta_2=6.400000e-07  Delta_21=4.642857e-07  Delta_12=7.428571e-08  Delta_both=7.142857e-07  (s^2=1.000000e-04)
+  --- belief m=4.0e-4 (at boundary): G(b) = 0.0000000000e+00
+    never acquire                      +0.000000000000e+00
+    always both                        +3.842892102911e-04
+    fixed 1 then 2 (optimal stop)      +3.844487862897e-04   [GH400 - quad = +1.45e-09]
+    fixed 2 then 1 (optimal stop)      +3.875552559286e-04   [GH400 - quad = +1.77e-08]
+    myopic VOI                         +3.875552559286e-04   [GH400 - quad = +1.77e-08]
+    exact optimal (Bellman)            +3.875552559286e-04   [GH400 - quad = +1.77e-08]
+    one-step VOI_1 = +2.005955e-04, VOI_2 = +3.650852e-04; myopic first = 2
+    open-loop (non-adaptive) candidates: none: +0.000000e+00, {1}: +2.005955e-04, {2}: +3.650852e-04, {1,2}: +3.842892e-04
+    best open-loop set = {1,2} (+3.842892e-04); value of adaptivity V_opt - open-loop = +3.266e-06
+    myopic regret V_opt - V_myopic = +0.000e+00  (myopic == optimal)
+  --- belief m=6.0e-4: G(b) = 1.9928000000e-04
+    never acquire                      +1.992800000000e-04
+    always both                        +4.645345434511e-04
+    fixed 1 then 2 (optimal stop)      +4.649594913079e-04   [GH400 - quad = -3.76e-09]
+    fixed 2 then 1 (optimal stop)      +4.684550580287e-04   [GH400 - quad = -2.43e-08]
+    myopic VOI                         +4.684550580287e-04   [GH400 - quad = -2.43e-08]
+    exact optimal (Bellman)            +4.684550580287e-04   [GH400 - quad = -2.43e-08]
+    one-step VOI_1 = +1.093390e-04, VOI_2 = +2.491982e-04; myopic first = 2
+    open-loop (non-adaptive) candidates: none: +1.992800e-04, {1}: +3.086190e-04, {2}: +4.484782e-04, {1,2}: +4.645345e-04
+    best open-loop set = {1,2} (+4.645345e-04); value of adaptivity V_opt - open-loop = +3.921e-06
+    myopic regret V_opt - V_myopic = +0.000e+00  (myopic == optimal)
+====================================================================================================
+CASE: high-signal synthetic (rho up to 0.5)
+  s=0.01, lam=2.0, tau=0.0002, qprev=0.0; rho1=0.5, rho2=0.4, kappa=0.3, c1=0.002, c2=0.003
+  Delta_1=2.500000e-05  Delta_2=1.600000e-05  Delta_21=6.868132e-06  Delta_12=1.586813e-05  Delta_both=3.186813e-05  (s^2=1.000000e-04)
+  --- belief m=0.0 (no-trade center): G(b) = 0.0000000000e+00
+    never acquire                      +0.000000000000e+00
+    always both                        -8.878007110711e-04
+    fixed 1 then 2 (optimal stop)      +1.599197460079e-03   [GH400 - quad = -5.67e-06]
+    fixed 2 then 1 (optimal stop)      +0.000000000000e+00   [GH400 - quad = +0.00e+00]
+    myopic VOI                         +1.599197460079e-03   [GH400 - quad = -5.67e-06]
+    exact optimal (Bellman)            +1.599197460079e-03   [GH400 - quad = -5.67e-06]
+    one-step VOI_1 = +1.599197e-03, VOI_2 = -1.949581e-04; myopic first = 1
+    open-loop (non-adaptive) candidates: none: +0.000000e+00, {1}: +1.599197e-03, {2}: -1.949581e-04, {1,2}: -8.878007e-04
+    best open-loop set = {1} (+1.599197e-03); value of adaptivity V_opt - open-loop = +6.072e-18
+    myopic regret V_opt - V_myopic = +0.000e+00  (myopic == optimal)
+  --- belief m=2e-3: G(b) = 1.5920000000e-03
+    never acquire                      +1.592000000000e-03
+    always both                        -6.165287986711e-04
+    fixed 1 then 2 (optimal stop)      +1.905412104174e-03   [GH400 - quad = +3.55e-06]
+    fixed 2 then 1 (optimal stop)      +1.592000000000e-03   [GH400 - quad = +0.00e+00]
+    myopic VOI                         +1.905412104174e-03   [GH400 - quad = +3.55e-06]
+    exact optimal (Bellman)            +1.905412104174e-03   [GH400 - quad = +3.55e-06]
+    one-step VOI_1 = +3.134121e-04, VOI_2 = -1.405708e-03; myopic first = 1
+    open-loop (non-adaptive) candidates: none: +1.592000e-03, {1}: +1.905412e-03, {2}: +1.862915e-04, {1,2}: -6.165288e-04
+    best open-loop set = {1} (+1.905412e-03); value of adaptivity V_opt - open-loop = +1.041e-17
+    myopic regret V_opt - V_myopic = +0.000e+00  (myopic == optimal)

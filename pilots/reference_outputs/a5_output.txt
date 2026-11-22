@@ -1,0 +1,51 @@
+boundary (s units) = 0.100505; lam'=0.05, tau'=0.05, qprev=0.0
+grid: d in [0,1] (21 pts), c in [1e-5, 0.316] log (25 pts), rho in [0.02, 0.05, 0.1, 0.2, 0.35, 0.5] (rho2=1.5 rho), kappa in [-0.8, -0.4, 0.0, 0.4, 0.8]
+evaluated 14175 feasible grid points; infeasible (non-PSD) skipped: 1575; time 164.6s
+
+FRACTION OF GRID (all 14175 points):
+  regret > 0 (gap > 1e-7 of gain):          865  = 6.1023%
+  regret > 1% of optimal gain:              865  = 6.1023%
+FRACTION AMONG POINTS WITH POSITIVE OPTIMAL GAIN (n=6765):
+  regret > 0:                            12.7864%
+  regret > 1% of optimal gain:           12.7864%
+  points with optimal gain > 0 at all:   6765 of 14175
+
+MAXIMUM regret (absolute, s=1 units):  2.425038e-01
+  at d=0.150, c=8.660e-02, rho=0.2, rho2=0.300, kappa=-0.8, gain=2.425038e-01, myopic first=None, VOI1=-5.7601e-02, VOI2=-1.0254e-02
+  relative regret at that point: 100.0000%
+MAXIMUM relative regret (regret/gain): 100.0000%
+  at d=0.000, c=1.540e-02, rho=0.02, rho2=0.030, kappa=-0.8, regret=1.619056e-03, gain=1.619056e-03
+
+CONCENTRATION (fraction of points with regret > 1% of gain, by factor):
+  kappa=-0.80: 24.143%  (points with regret>0: 507)
+  kappa=-0.40: 8.724%  (points with regret>0: 229)
+  kappa=+0.00: 3.111%  (points with regret>0: 98)
+  kappa=+0.40: 0.635%  (points with regret>0: 20)
+  kappa=+0.80: 0.349%  (points with regret>0: 11)
+  rho=+0.02: 1.943%  (points with regret>0: 51)
+  rho=+0.05: 5.714%  (points with regret>0: 150)
+  rho=+0.10: 12.267%  (points with regret>0: 322)
+  rho=+0.20: 10.819%  (points with regret>0: 284)
+  rho=+0.35: 2.238%  (points with regret>0: 47)
+  rho=+0.50: 0.698%  (points with regret>0: 11)
+  by distance d (bin: frac regret>1% of gain | regret>0 count):
+    d in [0.00,0.05): 0.593% | 4
+    d in [0.05,0.10): 2.519% | 17
+    d in [0.10,0.20): 5.333% | 72
+    d in [0.20,0.40): 6.296% | 170
+    d in [0.40,0.70): 7.086% | 287
+    d in [0.70,1.01): 6.667% | 315
+  by cost c (decade bins):
+    c in [1e-05,1e-04): 6.731% | 229
+    c in [1e-04,1e-03): 7.584% | 215
+    c in [1e-03,1e-02): 7.160% | 203
+    c in [1e-02,1e-01): 5.791% | 197
+    c in [1e-01,1e+00): 1.235% | 21
+
+regret>0 cases with both one-step VOI <= 0 (myopic stops, optimal queries): 865
+regret>0 cases with a positive one-step VOI (argmax mismatch): 0
+
+quadrature spot check on 30 random grid points (dense trapezoid vs split quadrature): regret>0 classification agrees in 30, disagrees in 0; max |dense - quad| on V and regret = 4.15e-09
+
+saved figure: pilots/figures/a5_myopic_regret_heatmap.png
+total time 328.1s

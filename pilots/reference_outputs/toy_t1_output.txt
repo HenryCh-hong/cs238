@@ -1,0 +1,41 @@
+Instance A marginal checks: P(Y1=+1)= 1/2  P(Y2=+1)= 1/2  P(Y1=+,Y2=+)= 1/4  P(r=+1,Y1=+)= 1/4  P(r=+1,Y2=+)= 1/4
+==============================================================================
+Instance A (synergy, both one-step VOIs < 0): costs c1=1/10, c2=1/10, tau=1/10
+Stop value G(empty) = 0
+  one-step net VOI of source 1: E[G(post)] - G - c1 = 0 - 0 - 1/10 = -1/10  (= -0.100000)
+  one-step net VOI of source 2: E[G(post)] - G - c2 = 0 - 0 - 1/10 = -1/10  (= -0.100000)
+Full expectimax tree (root first; indentation = depth):
+  1=+1 2=+1 obs={1: 1, 2: 1}  stop=7/10    -> best=stop V=7/10
+  1=+1 2=-1 obs={1: 1, 2: -1}  stop=7/10    -> best=stop V=7/10
+  1=+1 obs={1: 1}  stop=0  buy2=0.6000(3/5)  -> best=buy2 V=3/5
+  1=-1 2=+1 obs={1: -1, 2: 1}  stop=7/10    -> best=stop V=7/10
+  1=-1 2=-1 obs={1: -1, 2: -1}  stop=7/10    -> best=stop V=7/10
+  1=-1 obs={1: -1}  stop=0  buy2=0.6000(3/5)  -> best=buy2 V=3/5
+  2=+1 1=+1 obs={1: 1, 2: 1}  stop=7/10    -> best=stop V=7/10
+  2=+1 1=-1 obs={1: -1, 2: 1}  stop=7/10    -> best=stop V=7/10
+  2=+1 obs={2: 1}  stop=0  buy1=0.6000(3/5)  -> best=buy1 V=3/5
+  2=-1 1=+1 obs={1: 1, 2: -1}  stop=7/10    -> best=stop V=7/10
+  2=-1 1=-1 obs={1: -1, 2: -1}  stop=7/10    -> best=stop V=7/10
+  2=-1 obs={2: -1}  stop=0  buy1=0.6000(3/5)  -> best=buy1 V=3/5
+  obs={}  stop=0  buy1=0.5000(1/2)  buy2=0.5000(1/2)  -> best=buy1 V=1/2
+Optimal value V* = 1/2 = 0.500000; optimal first action = buy1
+==============================================================================
+Instance B (control, myopic = optimal): costs c1=1/10, c2=1/10, tau=1/10
+Stop value G(empty) = 0
+  one-step net VOI of source 1: E[G(post)] - G - c1 = 7/10 - 0 - 1/10 = 3/5  (= +0.600000)
+  one-step net VOI of source 2: E[G(post)] - G - c2 = 0 - 0 - 1/10 = -1/10  (= -0.100000)
+Full expectimax tree (root first; indentation = depth):
+  1=+1 2=+1 obs={1: 1, 2: 1}  stop=7/10    -> best=stop V=7/10
+  1=+1 2=-1 obs={1: 1, 2: -1}  stop=7/10    -> best=stop V=7/10
+  1=+1 obs={1: 1}  stop=7/10  buy2=0.6000(3/5)  -> best=stop V=7/10
+  1=-1 2=+1 obs={1: -1, 2: 1}  stop=7/10    -> best=stop V=7/10
+  1=-1 2=-1 obs={1: -1, 2: -1}  stop=7/10    -> best=stop V=7/10
+  1=-1 obs={1: -1}  stop=7/10  buy2=0.6000(3/5)  -> best=stop V=7/10
+  2=+1 1=+1 obs={1: 1, 2: 1}  stop=7/10    -> best=stop V=7/10
+  2=+1 1=-1 obs={1: -1, 2: 1}  stop=7/10    -> best=stop V=7/10
+  2=+1 obs={2: 1}  stop=0  buy1=0.6000(3/5)  -> best=buy1 V=3/5
+  2=-1 1=+1 obs={1: 1, 2: -1}  stop=7/10    -> best=stop V=7/10
+  2=-1 1=-1 obs={1: -1, 2: -1}  stop=7/10    -> best=stop V=7/10
+  2=-1 obs={2: -1}  stop=0  buy1=0.6000(3/5)  -> best=buy1 V=3/5
+  obs={}  stop=0  buy1=0.6000(3/5)  buy2=0.5000(1/2)  -> best=buy1 V=3/5
+Optimal value V* = 3/5 = 0.600000; optimal first action = buy1

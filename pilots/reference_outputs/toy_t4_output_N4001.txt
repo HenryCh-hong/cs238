@@ -1,0 +1,12 @@
+VALIDATION (K=2 DP vs voi_core closed form + quadrature)
+  lam=3.0 tau=3.0bp costs=(1.0, 2.0)bp rho=(0.2, 0.3) kappa=0.4: max|V_DP-V_closedform| = 3.117e-07 (real units), max|V_myopic_DP - V_myopic_ref| = 3.117e-07
+  lam=5.0 tau=1.0bp costs=(0.5, 5.0)bp rho=(0.1, 0.4) kappa=-0.5: max|V_DP-V_closedform| = 1.474e-07 (real units), max|V_myopic_DP - V_myopic_ref| = 1.474e-07
+  lam=1.0 tau=5.0bp costs=(0.1, 0.3)bp rho=(0.05, 0.4) kappa=0.5: max|V_DP-V_closedform| = 1.178e-07 (real units), max|V_myopic_DP - V_myopic_ref| = 1.178e-07
+
+m-grid N=4001
+K=3: instances=72, DP time per instance mean=0.294s (per state=9.17 us), one myopic decision (K closed-form VOIs) = 1315.7 us
+   regret instances (max_m regret > 1e-6 x gross VOI): 66/72 = 0.917; (max_m regret > 1e-12 real units): 66/72 = 0.917
+   prior-averaged regret / gross VOI: mean=0.0121, median=0.0039, max=0.1343
+K=4: instances=73, DP time per instance mean=0.784s (per state=12.25 us), one myopic decision (K closed-form VOIs) = 1764.4 us
+   regret instances (max_m regret > 1e-6 x gross VOI): 72/73 = 0.986; (max_m regret > 1e-12 real units): 72/73 = 0.986
+   prior-averaged regret / gross VOI: mean=0.0259, median=0.0148, max=0.1712

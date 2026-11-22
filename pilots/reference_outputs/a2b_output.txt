@@ -1,0 +1,16 @@
+
+[A3 designed instance] (s = 1 units), N = 2,000,000 common random draws; 'fixed*' = forced first query, optional second
+  never    : MC +5.2708125000e-01 +/- 1.6e-19   exact +5.2708125000e-01   (diff/s.e. = +1414.21)
+  both     : MC +5.2690553802e-01 +/- 1.5e-04   exact +5.2695867891e-01   (diff/s.e. = -0.36)
+  fixed12  : MC +5.2756521229e-01 +/- 1.1e-04   exact +5.2758654913e-01   (diff/s.e. = -0.20)
+  fixed21  : MC +5.2692553626e-01 +/- 1.5e-04   exact +5.2697867385e-01   (diff/s.e. = -0.36)
+  myopic   : MC +5.2708125000e-01 +/- 1.6e-19   exact +5.2708125000e-01   (diff/s.e. = +1414.21)
+  optimal  : MC +5.2756521229e-01 +/- 1.1e-04   exact +5.2758654913e-01   (diff/s.e. = -0.20)
+
+[A4 designed instance] (s = 1 units), N = 2,000,000 common random draws; 'fixed*' = forced first query, optional second
+  never    : MC +5.2708125000e-01 +/- 1.6e-19   exact +5.2708125000e-01   (diff/s.e. = +1414.21)
+  fixed12  : MC +5.2761781730e-01 +/- 1.1e-04   exact +5.2762132679e-01   (diff/s.e. = -0.03)
+  fixed21  : MC +5.2707554060e-01 +/- 1.5e-04   exact +5.2712867729e-01   (diff/s.e. = -0.36)
+  myopic   : MC +5.2707554060e-01 +/- 1.5e-04   exact +5.2712867729e-01   (diff/s.e. = -0.36)
+  optimal  : MC +5.2761781730e-01 +/- 1.1e-04   exact +5.2762132679e-01   (diff/s.e. = -0.03)
+exit=0
